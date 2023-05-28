@@ -69,11 +69,13 @@ while [ "$valid_choice" = false ]; do
 		fi
 		#=========关闭大世界end=========
 		sleep 3s
+		#删除screen 会话
+		screen -X -S jihuang-caves quit
+		screen -X -S jihuang-master quit
 		echo "饥荒服务器已关闭！"
 		valid_choice=true
 	elif [ "$choice" = "3" ]; then
 		echo "正在更新饥荒服务器......"
-
 		#=========更新steam服务器=========
 		/home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/dst +app_update 343050 validate +quit &
 		updatepid[0]=$!
@@ -128,6 +130,9 @@ while [ "$valid_choice" = false ]; do
 			screen -S jihuang-master -X eval "stuff 'c_shutdown(true)'\015"
 		fi
 		#=========关闭大世界end=========
+		sleep 1s
+		#删除screen 会话
+		screen -X -S jihuang-master quit
 		echo "饥荒大世界服务器关闭操作完成！"
 		valid_choice=true
 	elif [ "$choice" = "7" ]; then
@@ -142,6 +147,9 @@ while [ "$valid_choice" = false ]; do
 			screen -S jihuang-caves -X eval "stuff 'c_shutdown(true)'\015"
 		fi
 		#=========关闭洞穴end=========
+		sleep 1s
+		#删除screen 会话
+		screen -X -S jihuang-caves quit
 		echo "饥荒洞穴服务器关闭操作完成！"
 		valid_choice=true
 	elif [ "$choice" = "8" ]; then
@@ -162,7 +170,7 @@ while [ "$valid_choice" = false ]; do
 		valid_choice=true
 	elif [ "$choice" = "10" ]; then
 		echo "该操作暂时未实现，请重新选择"
-    
+		
 	elif [ "$choice" = "11" ]; then
 		echo "该操作暂时未实现，请重新选择"
 	elif [ "$choice" = "12" ]; then
@@ -185,6 +193,9 @@ while [ "$valid_choice" = false ]; do
 		echo "关闭服务器成功！接下来将更新服务器......"
 		#=========关闭服务器end=========
 		sleep 3s
+		#删除screen 会话
+		screen -X -S jihuang-caves quit
+		screen -X -S jihuang-master quit
 		#=========更新服务器end=========
 		/home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/dst +app_update 343050 validate +quit &
 		updatepid[0]=$!
